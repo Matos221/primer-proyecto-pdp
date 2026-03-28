@@ -1,0 +1,1 @@
+saludar nombre = "Hola "++ nombre :: [CHAR]

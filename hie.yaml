@@ -1,0 +1,7 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "primer-proyecto-pdp:lib"
+
+    - path: "./test"
+      component: "primer-proyecto-pdp:test:primer-proyecto-pdp-test"
