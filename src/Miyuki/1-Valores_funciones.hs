@@ -77,3 +77,85 @@ esMasLargoQue num palabra = num < length(palabra)
 esParElMayor numero otroNumero = esPar (max numero otroNumero)
 esSaludo palabra = (palabra == "hola" || palabra == "chau")
 laInicialEstaIncluida unaPalabra otraPalabra = elem (head unaPalabra) otraPalabra
+
+-- esBisiesto 
+esBisiesto :: Int -> Bool
+esBisiesto x = ( (esMultiploDe x 4 && not(esMultiploDe x 10) )  || esMultiploDe x 400)
+
+-- deCelsiusAFarenheit
+deCelsiusAFarenheit  :: Float -> Float 
+deCelsiusAFarenheit x = x * 1.8 + 32
+
+-- deFarenheitACelsius
+deFarenheitACelsius  :: Float -> Float
+deFarenheitACelsius x = (x - 32) / 1.8 
+
+-- Hace frio ??
+haceFrioCelsius :: Float -> Bool
+haceFrioCelsius x = x < 8
+
+haceFrioFarenheit :: Float -> Bool
+haceFrioFarenheit x = (haceFrioCelsius.deFarenheitACelsius) x 
+
+-- Dispersion
+
+-- Con guardas
+maximoEntreTres :: Int ->Int ->Int ->Int
+maximoEntreTres x y z
+  | x > y && x > z = x
+  | y > x && y > z = y
+  | z > x && z > y = z
+  
+minimoEntreTres :: Int ->Int ->Int ->Int
+minimoEntreTres x y z
+  | x < y && x < z = x
+  | y < x && y < z = y
+  | z < x && z < y = z
+
+-- Mas corto 
+maximoEntreTres :: Int ->Int ->Int ->Int
+maximoEntreTres x y z = max (max x y) z
+
+minimoEntreTres :: Int ->Int ->Int ->Int
+minimoEntreTres x y z = min (min x y) z
+
+dispersion :: Int -> Int -> Int -> Int
+dispersion x y z = (maximoEntreTres x y z) - (minimoEntreTres x y z)
+
+-- Pasan los dias
+diasParejos :: Int ->Int ->Int ->Bool
+diasParejos x y z = (dispersion x y z ) < 30
+
+diasLocos :: Int ->Int ->Int ->Bool
+diasLocos x y z = (dispersion x y z ) > 100
+
+diasNormales :: Int ->Int ->Int ->Bool
+diasNormales x y z = not(diasParejos x y z) && not(diasLocos x y z)
+
+-- Fabrica de muebles con pinos
+
+metrosACentimetros :: Number -> Number
+metrosACentimetros metros = metros * 100
+
+-- Funciones para obtener los pesos de la base (que es hasta 3 metros) y el tronco (altura pasada los 3 metros)
+alturaBase :: Number -> Number
+alturaBase altura = min altura 3 -- (Si la altura pasa los 3 metros se queda con los primeros 3, los restantes se usaran en la siguiente funcion)
+
+alturaTronco :: Number -> Number
+alturaTronco altura = max (altura - 3 ) 0 -- (Si se paso los 3 metros de alto, tomo los restantes y comparo si son mas que 0 los uso, sino significa que no paso los 3)
+
+-- Tomo las medidas del peso de la base y tronco del pino
+pesoBasePino ::  Number -> Number 
+pesoBasePino altura = (metrosACentimetros . alturaBase) altura * 3 -- (Calculo el peso de la base del pino, es decir, hasta los 3 metros)
+
+pesoTroncoPino :: Int -> Int
+pesoTroncoPino altura = (metrosACentimetros . alturaTronco) altura * 2 -- (Calculo el peso del tronco del pino, es decir, pasado los 3 metros)
+
+pesoPino :: Int -> Int
+pesoPino altura = pesoBasePino altura + pesoTroncoPino altura -- (Sumo los pesos de todo el pino)
+
+esPesoUtil :: Int -> Bool
+esPesoUtil x = x > 400 && x < 1000
+
+sirvePino :: Int -> Bool
+sirvePino x = (esPesoUtil . pesoPino) x

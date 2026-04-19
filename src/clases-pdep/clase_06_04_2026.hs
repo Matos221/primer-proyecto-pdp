@@ -36,22 +36,26 @@ esNumeroPositivo numero = numero > 0
 
 -}
 
-pesoPino :: Number -> Number
-pesoPino altura = pesoBasePino altura + pesoTroncoPino altura
-
-metrosACentimetros :: Number -> Number
+metrosACentimetros :: Int -> Int
 metrosACentimetros metros = metros * 100
 
-pesoBasePino ::  Number -> Number 
-pesoBasePino altura = (metrosACentimetros . alturaBase) altura * 3
-
-pesoTroncoPino :: Number -> Number
-pesoTroncoPino altura = (metrosACentimetros . alturaTronco) altura * 3
-
-alturaBase :: Number -> Number
+alturaBase :: Int -> Int
 alturaBase altura = min altura 3
 
-alturaTronco :: Number -> Number
+alturaTronco :: Int -> Int
 alturaTronco altura = max (altura - 3 ) 0
 
--- FALTA DEFINIR pesoUtil y sirvePino --
+pesoBasePino ::  Int -> Int 
+pesoBasePino altura = (metrosACentimetros . alturaBase) altura * 3
+
+pesoTroncoPino :: Int -> Int
+pesoTroncoPino altura = (metrosACentimetros . alturaTronco) altura * 3
+
+pesoPino :: Int -> Int
+pesoPino altura = pesoBasePino altura + pesoTroncoPino altura
+
+esPesoUtil :: Int -> Bool
+esPesoUtil x = x > 400 && x < 1000
+
+sirvePino :: Int -> Bool
+sirvePino x = (esPesoUtil . pesoPino) x
