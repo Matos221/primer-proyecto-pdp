@@ -77,3 +77,13 @@ dobleDelLargo = ((*2).length)
 
 sumarNumeroAlTriple :: Int -> Int -> Int 
 sumarNumeroAlTriple = (+).(*3) -- Primero quiero que multiplique al primer parametro por 3 y luego los sume al segundo con el triple del primero
+
+sumaEsPar :: Int -> Int -> Bool
+sumaEsPar num = (even).(+num)
+
+algunoCumple :: (a -> Bool) ->a ->a ->a -> Bool
+algunoCumple comparador a1 a2 a3 = comparador a1 || comparador a2 || comparador a3
+
+-- Se aplica el tipo de clase "Ord", dado que "Max" necesita solo comparar con menor o mayor los valores. Ahora la funcion puede aplicarse con cualquier funcion como parametro y tipo de dato perteneciente a la clase "Ord"
+mejor :: Ord a => (a -> a) -> (a -> a) -> a -> a 
+mejor f1 f2 x = max (f1 x) (f2 x)
