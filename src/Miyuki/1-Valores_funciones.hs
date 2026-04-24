@@ -29,9 +29,17 @@ esNegativo numero = numero < 0
 areaRectangulo :: Int -> Int -> Int
 areaRectangulo lado altura = lado * altura
 
+perimetroTriangulo :: Int -> Int -> Int -> Int
+perimetroTriangulo l1 l2 l3 = l1 +l2 +l3
+
 {- Funcion llamando otras funciones -} 
 dobleDelCuadrado :: Int -> Int
 dobleDelCuadrado numero = doble (cuadrado numero) 
+
+-- Aplicacion parcial y Ord Sup
+dobleDelCuadrado :: Int -> Int
+dobleDelCuadrado = doble.cuadrado 
+
 
 {- Composicion de funciones -}
 tripleDelAnterior :: Int -> Int 
@@ -134,18 +142,18 @@ diasNormales x y z = not(diasParejos x y z) && not(diasLocos x y z)
 
 -- Fabrica de muebles con pinos
 
-metrosACentimetros :: Number -> Number
+metrosACentimetros :: Int -> Int
 metrosACentimetros metros = metros * 100
 
 -- Funciones para obtener los pesos de la base (que es hasta 3 metros) y el tronco (altura pasada los 3 metros)
-alturaBase :: Number -> Number
+alturaBase :: Int -> Int
 alturaBase altura = min altura 3 -- (Si la altura pasa los 3 metros se queda con los primeros 3, los restantes se usaran en la siguiente funcion)
 
-alturaTronco :: Number -> Number
+alturaTronco :: Int -> Int
 alturaTronco altura = max (altura - 3 ) 0 -- (Si se paso los 3 metros de alto, tomo los restantes y comparo si son mas que 0 los uso, sino significa que no paso los 3)
 
 -- Tomo las medidas del peso de la base y tronco del pino
-pesoBasePino ::  Number -> Number 
+pesoBasePino ::  Int -> Int 
 pesoBasePino altura = (metrosACentimetros . alturaBase) altura * 3 -- (Calculo el peso de la base del pino, es decir, hasta los 3 metros)
 
 pesoTroncoPino :: Int -> Int
