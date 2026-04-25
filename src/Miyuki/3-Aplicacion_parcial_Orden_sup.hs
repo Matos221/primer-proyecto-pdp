@@ -87,3 +87,30 @@ algunoCumple comparador a1 a2 a3 = comparador a1 || comparador a2 || comparador 
 -- Se aplica el tipo de clase "Ord", dado que "Max" necesita solo comparar con menor o mayor los valores. Ahora la funcion puede aplicarse con cualquier funcion como parametro y tipo de dato perteneciente a la clase "Ord"
 mejor :: Ord a => (a -> a) -> (a -> a) -> a -> a 
 mejor f1 f2 x = max (f1 x) (f2 x)
+
+-- Aplicamos ahora tuplas
+esUnClasico :: (String,Int) -> Bool
+esUnClasico = (<1959).snd
+
+-- Otra forma sin param implicito
+esUnClasico :: (String,Int) -> Bool
+esUnClasico pelicula= ((<1959).snd) pelicula
+
+-- Interesante ver como puedo crear una tupla a partir de solo poner el resultado de las funciones en (,)
+aplicarPar :: (a -> b) -> a -> a -> (b,b)
+aplicarPar func num1 num2 = (func num1 , func num2)   
+
+tuplaDeFunciones :: ( a -> b) -> (a -> c) -> a -> (b,c)
+tuplaDeFunciones f1 f2 valor = (f1 valor, f2 valor)
+
+-- Esta funcion se llama "flip"
+darVuelta  :: (b -> a -> c) -> a -> b -> c
+darVuelta func campo1 campo2 = func campo2 campo1
+
+-- Definición de flip
+flip :: (a -> b -> c) -> b -> a -> c
+
+-- Claro ejemplo que la composicion no es mas que funciones de Ord.Sup por recibir funciones como parametros
+componer :: (b -> c) -> (a -> b) -> a -> c -- Ver que si o si para componer el resultado de la primera funcion con el parametro no es mas que el argumento de la segunda funcion
+componer f2 f1 x =  f2 (f1 x)
+-- Para haskell la logica es  componer :: f -> g -> x -> y => y = f[g(x)]
