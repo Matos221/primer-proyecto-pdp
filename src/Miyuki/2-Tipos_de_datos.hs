@@ -1,3 +1,5 @@
+module Tipos_dato_Miyuki where
+import PdePreludat
 import Library
 
 {-  Repaso de composicion de funciones, con esto podemos acortar el codigo. 

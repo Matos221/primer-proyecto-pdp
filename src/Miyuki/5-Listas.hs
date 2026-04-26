@@ -1,3 +1,4 @@
+module Listas_Miyuki where
 import PdePreludat
 import Library
 
@@ -62,3 +63,19 @@ concatReverse = reverse.concat
 
 esMultiploDeAlguno :: Int -> [Int] -> Bool
 esMultiploDeAlguno numero lista = any (esMultiploDe numero) lista -- Usamos any, funcion la cual verifica que en una lista al menos un elemento cumpla la condicion.
+
+-- Llamadas
+
+-- Version corta con Pattern matching
+cuandoHabloMas :: ([Number],[Number]) -> String
+cuandoHabloMas (normal,reducido)
+    | sum normal > sum reducido = "Normal"
+    | sum normal < sum reducido = "Reducido"
+    | otherwise = "Normal"
+
+-- Version con composicion 
+cuandoHabloMas2 :: ([Number],[Number]) -> String
+cuandoHabloMas2 hitorialLlamadas
+    | (sum.fst) hitorialLlamadas > (sum.snd) hitorialLlamadas = "Normal"
+    | (sum.fst) hitorialLlamadas < (sum.snd) hitorialLlamadas = "Reducido"
+    | otherwise = "Normal"

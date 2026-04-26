@@ -1,5 +1,6 @@
+module Funciones_Miyuki where
 import PdePreludat
-import Prelude
+import Library
 
 {- VALORES -}
 
