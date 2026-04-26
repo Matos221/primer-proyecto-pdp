@@ -79,3 +79,87 @@ cuandoHabloMas2 hitorialLlamadas
     | (sum.fst) hitorialLlamadas > (sum.snd) hitorialLlamadas = "Normal"
     | (sum.fst) hitorialLlamadas < (sum.snd) hitorialLlamadas = "Reducido"
     | otherwise = "Normal"
+
+-- Más llamadas
+funcionesLlamadas :: ([Int] -> Int) -> ([Int],[Int]) -> String
+funcionesLlamadas funcion hitorialLlamadas
+    | (funcion.fst) hitorialLlamadas > (funcion) hitorialLlamadas = "normal"
+    | (funcion.fst) hitorialLlamadas < (funcion.snd) hitorialLlamadas = "reducido"
+    | otherwise = "normal"
+
+cuandoHizoMasLlamadas :: ([Int],[Int]) -> String
+cuandoHizoMasLlamadas hitorialLlamadas
+    | (length.fst) hitorialLlamadas > (length.snd) hitorialLlamadas = "normal"
+    | (length.fst) hitorialLlamadas < (length.snd) hitorialLlamadas = "reducido"
+    | otherwise = "normal"
+
+
+cuandoHizoLaLlamadaMasLarga :: ([Int],[Int]) -> String
+cuandoHizoLaLlamadaMasLarga hitorialLlamadas
+    | (maximum.fst) hitorialLlamadas > (maximum.snd) hitorialLlamadas = "normal"
+    | (maximum.fst) hitorialLlamadas < (maximum.snd) hitorialLlamadas = "reducido"
+    | otherwise = "normal"
+
+cuandoHizoMasLlamadasBreves :: ([Int],[Int]) -> String
+cuandoHizoMasLlamadasBreves hitorialLlamadas
+    | cantLlamadasBreves.fst hitorialLlamadas > cantLlamadasBreves.snd hitorialLlamadas = "normal"
+    | cantLlamadasBreves.fst hitorialLlamadas < cantLlamadasBreves.snd hitorialLlamadas = "reducido"
+    | otherwise = "normal"
+
+cantLlamadasBreves :: [Int] -> Int
+cantLlamadasBreves llamadas = (length.(filter =<2)) llamadas
+
+
+-- Promedios 
+promedios :: [[Float]] -> [Float]
+promedios listasNumeros = 
+      map average listasNumeros 
+
+-- promediosSinAplazos
+promediosSinAplazos :: [[Float]] -> [Float]
+promediosSinAplazos numeros  = 
+        map (average.filter (>=4)) numeros
+
+mejoresNotas :: [[Int]] -> [Int]
+mejoresNotas listaNumeros = map maximum listaNumeros
+
+aprobo :: [Int] -> Bool
+aprobo notas = all (>=4) notas
+
+-- Definí la función quienesAprobaron, que dada la información de un curso devuelve la información de los alumnos que aprobaron.
+quienesAprobaron :: [[Int]] -> [[Int]]
+quienesAprobaron notasAlumnos =  filter aprobo notasAlumnos
+
+-- Definí la función hayAlgunNegativo, que dada una lista de números nos dice si hay algún negativo.
+hayAlgunNegativo :: [Int] -> Bool
+hayAlgunNegativo numeros = any (<0) numeros
+
+-- Definí la función sumaPorFunciones, que dadas una lista de funciones y un número, devuelve la suma del resultado de aplicar las funciones al número. 
+sumaPorFunciones :: [(Int->Int)] -> Int -> Int
+sumaPorFunciones listaFunciones numero = (sum.aplicarFunciones listaFunciones ) numero
+
+-- Escribí, usando composición, una función cuantosCumplen que dada una condición y una lista, diga cuantos elementos la cumplen.
+cuantosCumplen :: ( a-> Bool) -> [a] -> Int
+cuantosCumplen condicion lista = 
+       ((length).(filter condicion)) lista
+
+-- Escribí una función rechazar, que dada una condición y una lista, devuelva una lista con los elementos que no la cumplen. 
+rechazar :: (a-> Bool) -> [a] -> [a]
+rechazar condicion lista = 
+       filter (not.condicion) lista
+
+-- Definí la función contiene que dado un elemento y una lista, nos diga si la lista contiene al elemento.
+contiene :: Eq a => a -> [a] -> Bool
+contiene elemento lista =   (not.null.filter (==elemento)) lista
+
+-- Escribí y explicitá el tipo de una función rotar, que tome una lista y ponga su cabeza (es decir, su primer elemento) al final.
+rotar :: [a] -> [a]
+rotar lista  = tail lista ++ [head lista]
+
+-- Escribí y explicitá el tipo de una función iniciales, que tome un string formado por varias palabras, y devuelva otro formado por las iniciales.
+iniciales :: String -> String
+iniciales = map head .filter((>1).length).words 
+
+-- Definí la función pam, que es... como el map pero al revés : le pasás una lista de funciones y un valor y te devuelve los resultados de aplicar cada una al valor.
+pam :: [a -> b] -> a -> [b]
+pam funciones valor = map ($ valor) funciones   
