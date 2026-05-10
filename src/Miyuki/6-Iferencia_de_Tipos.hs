@@ -37,3 +37,34 @@ const x y = x
 -- Para esta funcion se utiliza los "==", necesitamos aclarar que nuestro tipo "b" (nuestro resultado) pertenece a la clase de comparadores "Eq" ( == 0 !==) 
 f1 :: Eq b => (a -> b) -> (a -> b) -> a -> Bool
 f1 a1 a2 a3 = a1 a3 == a2 a3
+
+-- Para esta funcion se usaran operadores numericos, "+, ==, < o >", por lo tanto si o si "a", debe ser de la clase de tipos de datos "Num". Capaces de cumplir esas funciones.
+-- Si un parametro pertenece a una "clase de tipo de dato", este se ve obligado a cumplir con todas las operaciones definidas para su clase.
+f1 :: (Eq b, Num a) => (a -> b) -> (a -> b) -> a -> Bool
+f1 a1 a2 a3 = a1 (a3 + 1) == a2 (a3 + 1)
+
+f1 :: a -> a -> (a -> Bool) -> a
+f1 x y c | c x = y
+         | otherwise = x
+
+f1 :: (Num b, Ord b) => a -> (a -> b) -> Bool
+f1 x m = ((>0).m) x
+
+f1 :: (Ord b) => a -> a -> (a -> b) -> Bool
+f1 x y f  =  f x > f y
+
+f1 :: (Show a) => a -> String
+f1 x = "¡" ++ show x ++ "!"
+
+f1 :: (Num b) => (a -> b) -> (a -> Bool) -> [a] -> b 
+f1 f g = sum.map f.filter g
+
+fCondicional  :: (a -> Bool) -> (a -> b) -> (a -> b) -> a -> b 
+fCondicional f1 f2 f3 x
+    | f1 x = f2 x
+    | otherwise = f3 x
+    where  transformarCond f1 f2 f3 l = map (fCondicional f1 f2 f3) l
+    
+f1 :: (c -> d) -> (a -> b -> c) -> a -> b -> d
+f1 :: (c -> d) -> ((a -> (b -> c)) -> (a -> (b -> d)))
+f1 = (.)(.)(.)
