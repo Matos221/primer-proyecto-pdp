@@ -19,16 +19,16 @@ tuitCorto :: (String,String) -> Bool
 tuitCorto tuit = ((<10).length.snd) tuit
 
 -- Normal
-cantidadTuitsCortos :: [(String,String)] -> Int
+cantidadTuitsCortos :: [(String,String)] -> Number
 cantidadTuitsCortos tuit = (length.(filter tuitCorto))  tuit 
 
 -- Con el operador $ le pasamos a tuitCorto el parametro antes que al resto de funciones
-cantidadTuitsCortos :: [(String,String)] -> Int
-cantidadTuitsCortos tuit = (length.(filter tuitCorto)) $ tuit 
+cantidadTuitsCortos_2 :: [(String,String)] -> Number
+cantidadTuitsCortos_2 tuit = (length.(filter tuitCorto)) $ tuit 
 
 -- Con parametro implicito
-cantidadTuitsCortos :: [(String,String)] -> Int
-cantidadTuitsCortos = (length.(filter tuitCorto)) 
+cantidadTuitsCortos_3 :: [(String,String)] -> Number
+cantidadTuitsCortos_3 = (length.(filter tuitCorto)) 
 
 {- 
     Definí la función resumir, que dado un conjunto de tuits, los recorte, se quede con sus textos, y los junte todos en un sólo string separado por comas.
@@ -43,12 +43,12 @@ resumir :: [(String,String)] -> String
 resumir tuits = (csv.textos.recortar) tuits -- Estas fuciones YA USAN EL MAP
 
 csv :: [String] -> String
-csv listaTextos = intercalate "," listaTextos -- Intercalate es una funcion en haskell que toma un elemento y lo va intercalando con los elementos de la lista
+csv listaTextos = Numberercalate "," listaTextos -- Numberercalate es una funcion en haskell que toma un elemento y lo va Numberercalando con los elementos de la lista
 
 {- PRACTICAS -}
 
 -- Definí la función sumarSegun, que dada una función y una lista de elementos devuelve la suma de aplicar la función a cada uno de los elementos. 
-sumarSegun :: (a -> Int) -> [a] ->  Int
+sumarSegun :: (a -> Number) -> [a] ->  Number
 sumarSegun func lista = (sum.map func) lista
 
 alguno :: (a -> Bool) -> [a] -> Bool
@@ -61,7 +61,7 @@ esCapicua lista = (concatReverse lista) == (concat lista)
 concatReverse :: [[a]] -> [a]
 concatReverse = reverse.concat
 
-esMultiploDeAlguno :: Int -> [Int] -> Bool
+esMultiploDeAlguno :: Number -> [Number] -> Bool
 esMultiploDeAlguno numero lista = any (esMultiploDe numero) lista -- Usamos any, funcion la cual verifica que en una lista al menos un elemento cumpla la condicion.
 
 -- Llamadas
@@ -81,32 +81,32 @@ cuandoHabloMas2 hitorialLlamadas
     | otherwise = "Normal"
 
 -- Más llamadas
-funcionesLlamadas :: ([Int] -> Int) -> ([Int],[Int]) -> String
+funcionesLlamadas :: ([Number] -> Number) -> ([Number],[Number]) -> String
 funcionesLlamadas funcion hitorialLlamadas
     | (funcion.fst) hitorialLlamadas > (funcion) hitorialLlamadas = "normal"
     | (funcion.fst) hitorialLlamadas < (funcion.snd) hitorialLlamadas = "reducido"
     | otherwise = "normal"
 
-cuandoHizoMasLlamadas :: ([Int],[Int]) -> String
+cuandoHizoMasLlamadas :: ([Number],[Number]) -> String
 cuandoHizoMasLlamadas hitorialLlamadas
     | (length.fst) hitorialLlamadas > (length.snd) hitorialLlamadas = "normal"
     | (length.fst) hitorialLlamadas < (length.snd) hitorialLlamadas = "reducido"
     | otherwise = "normal"
 
 
-cuandoHizoLaLlamadaMasLarga :: ([Int],[Int]) -> String
+cuandoHizoLaLlamadaMasLarga :: ([Number],[Number]) -> String
 cuandoHizoLaLlamadaMasLarga hitorialLlamadas
     | (maximum.fst) hitorialLlamadas > (maximum.snd) hitorialLlamadas = "normal"
     | (maximum.fst) hitorialLlamadas < (maximum.snd) hitorialLlamadas = "reducido"
     | otherwise = "normal"
 
-cuandoHizoMasLlamadasBreves :: ([Int],[Int]) -> String
+cuandoHizoMasLlamadasBreves :: ([Number],[Number]) -> String
 cuandoHizoMasLlamadasBreves hitorialLlamadas
     | cantLlamadasBreves.fst hitorialLlamadas > cantLlamadasBreves.snd hitorialLlamadas = "normal"
     | cantLlamadasBreves.fst hitorialLlamadas < cantLlamadasBreves.snd hitorialLlamadas = "reducido"
     | otherwise = "normal"
 
-cantLlamadasBreves :: [Int] -> Int
+cantLlamadasBreves :: [Number] -> Number
 cantLlamadasBreves llamadas = (length.(filter =<2)) llamadas
 
 
@@ -120,26 +120,26 @@ promediosSinAplazos :: [[Float]] -> [Float]
 promediosSinAplazos numeros  = 
         map (average.filter (>=4)) numeros
 
-mejoresNotas :: [[Int]] -> [Int]
+mejoresNotas :: [[Number]] -> [Number]
 mejoresNotas listaNumeros = map maximum listaNumeros
 
-aprobo :: [Int] -> Bool
+aprobo :: [Number] -> Bool
 aprobo notas = all (>=4) notas
 
 -- Definí la función quienesAprobaron, que dada la información de un curso devuelve la información de los alumnos que aprobaron.
-quienesAprobaron :: [[Int]] -> [[Int]]
+quienesAprobaron :: [[Number]] -> [[Number]]
 quienesAprobaron notasAlumnos =  filter aprobo notasAlumnos
 
 -- Definí la función hayAlgunNegativo, que dada una lista de números nos dice si hay algún negativo.
-hayAlgunNegativo :: [Int] -> Bool
+hayAlgunNegativo :: [Number] -> Bool
 hayAlgunNegativo numeros = any (<0) numeros
 
 -- Definí la función sumaPorFunciones, que dadas una lista de funciones y un número, devuelve la suma del resultado de aplicar las funciones al número. 
-sumaPorFunciones :: [(Int->Int)] -> Int -> Int
+sumaPorFunciones :: [(Number->Number)] -> Number -> Number
 sumaPorFunciones listaFunciones numero = (sum.aplicarFunciones listaFunciones ) numero
 
 -- Escribí, usando composición, una función cuantosCumplen que dada una condición y una lista, diga cuantos elementos la cumplen.
-cuantosCumplen :: ( a-> Bool) -> [a] -> Int
+cuantosCumplen :: ( a-> Bool) -> [a] -> Number
 cuantosCumplen condicion lista = 
        ((length).(filter condicion)) lista
 
